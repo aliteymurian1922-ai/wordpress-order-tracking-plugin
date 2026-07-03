@@ -1,0 +1,452 @@
+:root {
+    --otc-primary: #667eea;
+    --otc-secondary: #764ba2;
+    --otc-danger: #f5576c;
+    --otc-radius: 22px;
+}
+
+/* جلوگیری از اسکرول وقتی پاپ‌آپ باز است */
+body.otc-popup-open {
+    overflow: hidden;
+}
+
+/* دکمه شیشه‌ای */
+.otc-glass-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.65),
+        rgba(118, 75, 162, 0.55)
+    );
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 12px 35px rgba(102, 126, 234, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transition: all 0.28s ease;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.otc-glass-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: -120%;
+    width: 80%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.55s ease;
+}
+
+.otc-glass-button:hover::before {
+    left: 140%;
+}
+
+.otc-glass-button:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow:
+        0 18px 45px rgba(102, 126, 234, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.otc-glass-button .dashicons {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+/* Overlay */
+.otc-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(10, 10, 20, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.otc-popup-overlay.active {
+    display: flex;
+    animation: otcFadeIn 0.25s ease;
+}
+
+@keyframes otcFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal */
+.otc-popup-container {
+    direction: rtl;
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: var(--otc-radius);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88));
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    animation: otcSlideUp 0.32s ease;
+}
+
+@keyframes otcSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* دکمه بستن */
+.otc-close-popup {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(245, 87, 108, 0.95);
+    color: #fff;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.otc-close-popup:hover {
+    transform: rotate(90deg);
+    background: #ef334f;
+}
+
+/* Header */
+.otc-popup-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 10px 44px 22px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.otc-popup-header h2 {
+    margin: 0 0 8px;
+    color: #1f2937;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.otc-popup-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Form */
+.otc-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.otc-input-group input {
+    flex: 1;
+    min-height: 52px;
+    padding: 0 16px;
+    border: 1px solid rgba(17, 24, 39, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #111827;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.otc-input-group input:focus {
+    border-color: rgba(102, 126, 234, 0.75);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+}
+
+.otc-search-btn {
+    min-height: 52px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--otc-primary), var(--otc-secondary));
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.otc-search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.35);
+}
+
+.otc-search-btn:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+.otc-search-btn .dashicons-update {
+    animation: otcSpin 1s linear infinite;
+}
+
+@keyframes otcSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Result */
+.otc-result {
+    margin-top: 18px;
+}
+
+.otc-success {
+    color: #fff;
+    padding: 24px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.25), transparent 35%),
+        linear-gradient(135deg, var(--otc-primary), var(--otc-secondary));
+    box-shadow: 0 18px 45px rgba(102, 126, 234, 0.28);
+    animation: otcResultIn 0.28s ease;
+}
+
+@keyframes otcResultIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.otc-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.otc-order-number {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.otc-order-status {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.otc-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.otc-info-item {
+    padding: 14px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.otc-info-label {
+    margin-bottom: 6px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.otc-info-value {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.otc-tracking-code {
+    margin: 16px 0;
+    padding: 18px;
+    border-radius: 17px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.otc-tracking-code strong {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.otc-code-value {
+    direction: ltr;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.otc-company {
+    margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.92;
+}
+
+.otc-tracking-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--otc-primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 900;
+    transition: all 0.25s ease;
+}
+
+.otc-tracking-link:hover {
+    color: var(--otc-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.otc-items-list {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.otc-items-list h4 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.otc-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 13px;
+}
+
+.otc-item:last-child {
+    border-bottom: 0;
+}
+
+.otc-error {
+    padding: 18px;
+    border-radius: 16px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f093fb, var(--otc-danger));
+    animation: otcShake 0.35s ease;
+}
+
+@keyframes otcShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-3px);
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .otc-popup-container {
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .otc-popup-header {
+        padding-left: 38px;
+        padding-right: 38px;
+    }
+
+    .otc-popup-header h2 {
+        font-size: 22px;
+    }
+
+    .otc-input-group {
+        flex-direction: column;
+    }
+
+    .otc-search-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .otc-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .otc-order-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .otc-code-value {
+        font-size: 20px;
+    }
+}
